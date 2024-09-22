@@ -2,6 +2,9 @@
 
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { auth } from "../../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   email: string;
@@ -9,13 +12,28 @@ type Inputs = {
 };
 
 const Register = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        router.push("/auth/login");
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          alert("このメールアドレスは既に使用されています。");
+        } else {
+          error.message;
+        }
+      });
+  };
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
