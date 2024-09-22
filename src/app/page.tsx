@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Sidebar from "./components/Sidebar";
-import Char from "./components/Char";
+import Chat from "./components/Chat";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
           <Sidebar />
         </div>
         <div className="w-4/5 h-full border-r">
-          <Char />
+          <Chat />
         </div>
       </div>
     </div>
