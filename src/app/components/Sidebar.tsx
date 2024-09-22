@@ -1,4 +1,5 @@
 import React from "react";
+import { IoIosLogOut } from "react-icons/io";
 
 const Sidebar = () => {
   return (
@@ -23,6 +24,10 @@ const Sidebar = () => {
             Room4
           </li>
         </ul>
+      </div>
+      <div className="text-xl flex items-center justify-evenly mb-2 cursor-pointer p-4 text-slate-100 hover:bg-slate-700 duration-150">
+        <IoIosLogOut />
+        <span>ログアウト</span>
       </div>
     </div>
   );
